@@ -52,6 +52,24 @@ def get_original_image():
 
     return google_images
 
+def get_image(url):
+    pic = Image.open(requests.get(url, stream=True).raw).convert('RGB')
+    byteio = BytesIO()
+    pic.save(byteio, format = 'PNG')
+    return pic
+
+def compare_image(url1):
+    similar_images = []
+    pic1 = imagehash.whash(url1)
+    for i,v in enumerate(get_original_image()):
+        image_from_list = get_image(v['original'])
+        pic2 = imagehash.whash(image_from_list)
+        if pic2-pic1 <= 8:
+            similar_images.append(pic2)
+            print(pic2)
+    return similar_images
+compare_image(get_image(get_original_image()[0]['original']))
+
 
 """crew = 'TestImages/img_1.jpg'
 crew_img = Image.open(crew)
