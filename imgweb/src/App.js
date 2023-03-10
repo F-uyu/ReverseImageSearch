@@ -1,11 +1,12 @@
 import './App.css';
-import TopPage from './components/TopPage';
-
+import NavBar from './components/NavBar';
+import React from 'react';
 function App() {
   return (
-    <div>
-      <TopPage />
-    </div>
+    <React.Fragment>
+      <NavBar />
+
+    </React.Fragment>
   );
 }
 
